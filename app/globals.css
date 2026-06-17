@@ -1,0 +1,213 @@
+/* Continuity — design tokens (Tailwind v4, CSS-first). From design_handoff_continuity. */
+@import "tailwindcss";
+
+/* next-themes uses class="dark"; tell Tailwind v4 to use the class strategy */
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --bg: #fbfbfa;
+  --panel: #ffffff;
+  --bg-subtle: #f6f6f4;
+  --bg-muted: #efefec;
+  --border: #e8e8e4;
+  --border-strong: #dadad5;
+
+  --fg: #191919;
+  --fg-body: #3d3d3d;
+  --fg-muted: #76766f;
+  --fg-faint: #a3a39c;
+
+  --accent: #0d9488;
+  --accent-hover: #0f766e;
+  --accent-fg: #ffffff;
+  --accent-tint: #f0fdfa;
+  --accent-tint-b: #cdeee8;
+  --accent-text: #0f766e;
+
+  --success: #0e9f6e;
+  --success-tint: #ecfdf3;
+  --success-text: #067a52;
+
+  --warning: #c2700a;
+  --warning-tint: #fdf6ec;
+  --warning-b: #f3dcb0;
+  --warning-text: #a05a00;
+
+  --danger: #dc2626;
+  --danger-tint: #fef3f2;
+  --danger-text: #b42318;
+
+  --radius-card: 13px;
+  --radius-ctl: 9px;
+
+  --shadow-sm: 0 1px 2px rgba(20, 20, 16, 0.04), 0 1px 3px rgba(20, 20, 16, 0.05);
+  --shadow-md: 0 6px 16px -6px rgba(20, 20, 16, 0.1), 0 2px 6px -2px rgba(20, 20, 16, 0.06);
+  --shadow-lg: 0 18px 40px -12px rgba(20, 20, 16, 0.16);
+
+  /* legacy aliases so not-yet-migrated screens keep styling during the rollout */
+  --background: var(--bg);
+  --foreground: var(--fg);
+  --card: var(--panel);
+  --muted: var(--fg-muted);
+}
+
+.dark {
+  --bg: #0b0b0c;
+  --panel: #141416;
+  --bg-subtle: #101012;
+  --bg-muted: #1a1a1d;
+  --border: #262629;
+  --border-strong: #34343a;
+
+  --fg: #f3f3f2;
+  --fg-body: #c6c6c4;
+  --fg-muted: #8c8c8a;
+  --fg-faint: #5b5b5a;
+
+  --accent: #16b8a6;
+  --accent-hover: #2dd4bf;
+  --accent-fg: #04211d;
+  --accent-tint: #0d2b27;
+  --accent-tint-b: #1c4a43;
+  --accent-text: #5eead4;
+
+  --success: #34d399;
+  --success-tint: #0e2a20;
+  --success-text: #6ee7b7;
+
+  --warning: #f5b544;
+  --warning-tint: #2a2110;
+  --warning-b: #4a3a14;
+  --warning-text: #f5c970;
+
+  --danger: #f87171;
+  --danger-tint: #2a1414;
+  --danger-text: #fca5a5;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 8px 20px -8px rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 20px 44px -14px rgba(0, 0, 0, 0.7);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-panel: var(--panel);
+  --color-bg-subtle: var(--bg-subtle);
+  --color-bg-muted: var(--bg-muted);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+
+  --color-fg: var(--fg);
+  --color-fg-body: var(--fg-body);
+  --color-fg-muted: var(--fg-muted);
+  --color-fg-faint: var(--fg-faint);
+
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-fg: var(--accent-fg);
+  --color-accent-tint: var(--accent-tint);
+  --color-accent-tint-b: var(--accent-tint-b);
+  --color-accent-text: var(--accent-text);
+
+  --color-success: var(--success);
+  --color-success-tint: var(--success-tint);
+  --color-success-text: var(--success-text);
+  --color-warning: var(--warning);
+  --color-warning-tint: var(--warning-tint);
+  --color-warning-b: var(--warning-b);
+  --color-warning-text: var(--warning-text);
+  --color-danger: var(--danger);
+  --color-danger-tint: var(--danger-tint);
+  --color-danger-text: var(--danger-text);
+
+  --radius-card: var(--radius-card);
+  --radius-ctl: var(--radius-ctl);
+
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+
+  --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+
+@layer base {
+  body {
+    background: var(--bg);
+    color: var(--fg-body);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection {
+    background: var(--accent-tint);
+    color: var(--accent-text);
+  }
+  *:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fade-up {
+  animation: fadeUp 0.25s ease both;
+}
+
+/* ── Legacy helpers (still used by not-yet-redesigned screens) ─────────────── */
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-sm);
+}
+.btn-primary {
+  background: var(--accent);
+  color: var(--accent-fg);
+  border-radius: var(--radius-ctl);
+  font-weight: 500;
+}
+.btn-primary:hover {
+  background: var(--accent-hover);
+}
+.btn-primary:disabled {
+  opacity: 0.5;
+}
+.btn-secondary {
+  background: var(--panel);
+  color: var(--fg);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-ctl);
+  font-weight: 500;
+}
+.btn-secondary:hover {
+  background: var(--bg-muted);
+}
+.input {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-ctl);
+  color: var(--fg);
+}
+.input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 20%, transparent);
+}
